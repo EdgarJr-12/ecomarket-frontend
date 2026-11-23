@@ -3,270 +3,371 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoMarket | Tienda Sostenible</title>
-  <style>
-    :root {
-      --primary: #1b5e20;
-      --secondary: #4caf50;
-      --accent: #e8f5e9;
-      --dark: #1f2937;
-      --light: #f9fafb;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    body { background-color: var(--light); color: var(--dark); }
-
-    /* Navbar */
-    header {
-      background-color: white;
-      padding: 1rem 5%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-    nav { display: flex; gap: 20px; align-items: center; }
-    nav a { text-decoration: none; color: var(--dark); font-weight: 500; cursor: pointer; }
-    nav a:hover { color: var(--secondary); }
-    .cart-btn {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      border-radius: 25px;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* Hero Banner */
-    .hero {
-      background: linear-gradient(135deg, #1b5e20 0%, #388e3c 100%);
-      color: white;
-      padding: 3.5rem 5%;
-      text-align: center;
-    }
-    .hero h1 { font-size: 2.3rem; margin-bottom: 0.8rem; }
-    .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
-
-    /* Filtros y Catálogo */
-    .container { max-width: 1100px; margin: 2.5rem auto; padding: 0 20px; }
-    .filters { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
-    .filter-btn {
-      padding: 8px 18px;
-      border: 1px solid #d1d5db;
-      background: white;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: 500;
-    }
-    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 24px;
-    }
-    .card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      transition: transform 0.2s;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card:hover { transform: translateY(-4px); }
-    .card-img {
-      height: 150px;
-      background: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-    }
-    .card-body { padding: 1.2rem; }
-    .badge {
-      background: var(--accent);
-      color: var(--primary);
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-weight: 700;
-    }
-    .card-title { font-size: 1.1rem; margin: 10px 0 6px; font-weight: 700; }
-    .card-stock { font-size: 0.85rem; color: #6b7280; margin-bottom: 12px; }
-    .card-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 10px;
-      border-top: 1px solid #f3f4f6;
-    }
-    .price { font-size: 1.2rem; font-weight: 800; color: var(--primary); }
-    .add-btn {
-      background: var(--secondary);
-      color: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    .add-btn:hover { background: var(--primary); }
-
-    /* Modal Carrito */
-    .modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 200;
-    }
-    .modal-content {
-      background: white;
-      padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 420px;
-    }
-    .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-    .checkout-btn {
-      width: 100%;
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-top: 15px;
-      cursor: pointer;
-    }
-  </style>
+  <title>EcoMarket — Productos Sostenibles</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <header>
-    <div class="logo">🌿 EcoMarket</div>
-    <nav>
-      <a onclick="filtrar('Todos')">Catálogo</a>
-      <a onclick="alert('Módulo Administrador: Gestión de Stock activo')">Admin Stock</a>
-      <button class="cart-btn" onclick="abrirCarrito()">🛒 Carrito (<span id="cart-count">0</span>)</button>
+    <div class="brand" onclick="irA('inicio')">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="#4f7952"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>
+      EcoMarket
+    </div>
+    <nav class="nav-links">
+      <a id="nav-inicio" class="active" onclick="irA('inicio')">Inicio</a>
+      <a id="nav-catalogo" onclick="irA('catalogo')">Catálogo</a>
+      <a id="nav-nosotros" onclick="irA('nosotros')">Nosotros</a>
     </nav>
+    <a class="cart-icon" onclick="irA('carrito')">
+      🛒 <span class="cart-badge" id="badge-count">3</span>
+    </a>
   </header>
 
-  <section class="hero">
-    <h1>Productos Sostenibles para un Futuro Verde</h1>
-    <p>Consumo responsable con envío eco-amigable. Calidad certificada para tu hogar y día a día.</p>
+  <!-- 1. INICIO -->
+  <section id="view-inicio" class="view active">
+    <div class="hero">
+      <div>
+        <h1>Cuida el planeta, un hábito a la vez</h1>
+        <p>Productos sostenibles para un futuro más limpio y consciente.</p>
+        <button class="btn btn-pill" onclick="irA('catalogo')">Explorar productos →</button>
+      </div>
+      <div class="hero-art">
+        <svg width="160" height="160" viewBox="0 0 24 24" fill="#8fa891"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="cat-grid">
+        <div class="cat-card" onclick="filtrarDesdeInicio('Higiene')">
+          <div style="font-size: 1.8rem; color: var(--green);">🌿</div>
+          <h3>Higiene</h3>
+          <p>Cuidado personal sustentable</p>
+          <span style="color: var(--green); font-weight: bold;">→</span>
+        </div>
+        <div class="cat-card" onclick="filtrarDesdeInicio('Bolsas reutilizables')">
+          <div style="font-size: 1.8rem; color: var(--green);">🛍️</div>
+          <h3>Bolsas reutilizables</h3>
+          <p>Reduce el plástico, lleva la diferencia</p>
+          <span style="color: var(--green); font-weight: bold;">→</span>
+        </div>
+        <div class="cat-card" onclick="filtrarDesdeInicio('Termos')">
+          <div style="font-size: 1.8rem; color: var(--green);">🧴</div>
+          <h3>Termos</h3>
+          <p>Mantén tus bebidas a la temperatura ideal</p>
+          <span style="color: var(--green); font-weight: bold;">→</span>
+        </div>
+      </div>
+
+      <h2 class="section-title">Productos destacados</h2>
+      <div class="prod-grid" id="grid-destacados"></div>
+    </div>
   </section>
 
-  <main class="container">
-    <div class="filters">
-      <button class="filter-btn active" onclick="filtrar('Todos', this)">Todos</button>
-      <button class="filter-btn" onclick="filtrar('Hogar', this)">Hogar</button>
-      <button class="filter-btn" onclick="filtrar('Cuidado Personal', this)">Cuidado Personal</button>
-      <button class="filter-btn" onclick="filtrar('Accesorios', this)">Accesorios</button>
+  <!-- 2. CATÁLOGO -->
+  <section id="view-catalogo" class="view">
+    <div class="container">
+      <h2 class="section-title">Catálogo ecológico</h2>
+      <div class="catalog-layout">
+        <aside class="sidebar">
+          <h4>Filtrar productos</h4>
+          <p style="font-size: 0.85rem; font-weight: 600; margin-bottom: 10px;">Categorías</p>
+          <label class="filter-item"><input type="checkbox" value="Higiene" onchange="aplicarFiltros()"> Higiene</label>
+          <label class="filter-item"><input type="checkbox" value="Bolsas reutilizables" onchange="aplicarFiltros()"> Bolsas reutilizables</label>
+          <label class="filter-item"><input type="checkbox" value="Termos" onchange="aplicarFiltros()"> Termos</label>
+          <label class="filter-item"><input type="checkbox" value="Accesorios" onchange="aplicarFiltros()"> Accesorios</label>
+          <label class="filter-item"><input type="checkbox" value="Cuidado del hogar" onchange="aplicarFiltros()"> Cuidado del hogar</label>
+
+          <p style="font-size: 0.85rem; font-weight: 600; margin: 20px 0 8px;">Rango de precio</p>
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; color:var(--muted); margin-bottom:6px;">
+            <span>S/ 0</span><span id="precio-val">S/ 100</span>
+          </div>
+          <input type="range" min="10" max="100" value="100" style="width:100%; accent-color:var(--green);" oninput="document.getElementById('precio-val').innerText='S/ '+this.value; aplicarFiltros(this.value)">
+        </aside>
+
+        <div class="prod-grid" id="grid-catalogo"></div>
+      </div>
     </div>
+  </section>
 
-    <div class="grid" id="catalogo"></div>
-  </main>
-
-  <!-- Modal Carrito -->
-  <div class="modal" id="modal-carrito">
-    <div class="modal-content">
-      <h2 style="margin-bottom: 15px;">🛒 Tu Carrito EcoMarket</h2>
-      <div id="items-carrito">Tu carrito está vacío.</div>
-      <div style="margin-top: 15px; font-weight: bold; text-align: right;">Total: S/ <span id="total-carrito">0.00</span></div>
-      <button class="checkout-btn" onclick="finalizarCompra()">Finalizar Pedido</button>
-      <button onclick="cerrarCarrito()" style="width:100%; background:none; border:none; margin-top:10px; color:#666; cursor:pointer;">Seguir comprando</button>
+  <!-- 3. DETALLE DEL PRODUCTO -->
+  <section id="view-detalle" class="view">
+    <div class="container">
+      <div class="detail-grid" id="detalle-contenido"></div>
+      <h2 class="section-title">Productos relacionados</h2>
+      <div class="prod-grid" id="grid-relacionados"></div>
     </div>
-  </div>
+  </section>
 
-  <script>
-    const productosRespaldo = [
-      { id: 1, nombre: 'Cepillo Dental de Bambú', categoria: 'Cuidado Personal', precio: 15.00, stock: 50, icono: '🪥' },
-      { id: 2, nombre: 'Bolsa de Tela Orgánica', categoria: 'Accesorios', precio: 12.00, stock: 100, icono: '🛍️' },
-      { id: 3, nombre: 'Botella Térmica Inox', categoria: 'Accesorios', precio: 45.00, stock: 30, icono: '🧴' },
-      { id: 4, nombre: 'Jabón Artesanal de Avena', categoria: 'Cuidado Personal', precio: 18.50, stock: 40, icono: '🧼' },
-      { id: 5, nombre: 'Set Cubiertos de Madera', categoria: 'Hogar', precio: 25.00, stock: 35, icono: '🍴' },
-      { id: 6, nombre: 'Esponja Vegetal Luffa', categoria: 'Hogar', precio: 10.00, stock: 60, icono: '🧽' }
-    ];
+  <!-- 4. CARRITO / CHECKOUT -->
+  <section id="view-carrito" class="view">
+    <div class="container">
+      <h2 class="section-title">Tu carrito</h2>
+      <div class="cart-layout">
+        <div>
+          <table class="cart-table">
+            <thead>
+              <tr><th>Producto</th><th>Precio unit.</th><th>Cantidad</th><th>Subtotal</th><th></th></tr>
+            </thead>
+            <tbody id="cart-body"></tbody>
+          </table>
 
-    let productos = [...productosRespaldo];
-    let carrito = [];
-
-    function renderizar(lista) {
-      const grid = document.getElementById('catalogo');
-      grid.innerHTML = lista.map(p => `
-        <div class="card">
-          <div class="card-img">${p.icono || '🌱'}</div>
-          <div class="card-body">
-            <span class="badge">${p.categoria || 'Ecológico'}</span>
-            <h3 class="card-title">${p.nombre}</h3>
-            <p class="card-stock">Stock disponible: ${p.stock} unid.</p>
-            <div class="card-footer">
-              <span class="price">S/ ${Number(p.precio).toFixed(2)}</span>
-              <button class="add-btn" onclick="agregarCarrito(${p.id})">+ Agregar</button>
-            </div>
+          <div class="summary-box">
+            <h3 style="margin-bottom: 14px; font-size: 1.05rem;">Resumen del pedido</h3>
+            <div class="summary-row"><span>Subtotal (<span id="sum-count">0</span> productos)</span><span>S/ <span id="sum-sub">0.00</span></span></div>
+            <div class="summary-row"><span>Envío</span><span>S/ 8.00</span></div>
+            <div class="summary-total"><span>Total</span><span>S/ <span id="sum-total">0.00</span></span></div>
           </div>
         </div>
+
+        <div class="checkout-box">
+          <h3 style="margin-bottom: 16px; font-size: 1.05rem;">Datos de envío y pago</h3>
+          <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre completo"></div>
+          <div class="form-group"><label>Dirección</label><input type="text" placeholder="Dirección de entrega"></div>
+          <div class="form-group">
+            <label>Distrito</label>
+            <select>
+              <option>Selecciona tu distrito</option>
+              <option>San Martín de Porres</option>
+              <option>Miraflores</option>
+              <option>San Isidro</option>
+              <option>Santiago de Surco</option>
+              <option>Los Olivos</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Correo electrónico</label><input type="email" placeholder="tu@correo.com"></div>
+
+          <label style="font-size: 0.85rem; font-weight: 600;">Método de pago (simulado)</label>
+          <div class="radio-group">
+            <label><input type="radio" name="pago" checked> Tarjeta de crédito / débito</label>
+            <label><input type="radio" name="pago"> Yape / Plin</label>
+            <label><input type="radio" name="pago"> Transferencia bancaria</label>
+          </div>
+          <button class="btn btn-full" onclick="finalizarCompra()">Finalizar compra</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. NOSOTROS Y CONTACTO -->
+  <section id="view-nosotros" class="view">
+    <div class="container">
+      <h2 class="section-title">Nuestra historia</h2>
+      <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items:center; margin-bottom:48px;">
+        <div class="hero-art" style="height:200px; font-size:4rem; color:var(--green);">♻️</div>
+        <div style="color:var(--muted);">
+          <p style="margin-bottom:12px;">En <strong style="color:var(--text);">EcoMarket</strong> creemos que pequeños hábitos generan grandes cambios.</p>
+          <p>Somos una tienda en línea dedicada a ofrecer <strong style="color:var(--text);">productos ecológicos y sostenibles</strong> que te ayudan a reducir el uso de plástico y cuidar el medio ambiente.</p>
+        </div>
+      </div>
+
+      <h2 class="section-title">Nuestra misión y valores</h2>
+      <div class="cat-grid">
+        <div class="cat-card">
+          <div style="font-size:1.8rem;">🌿</div>
+          <h3>Misión</h3>
+          <p>Promover un estilo de vida más sostenible a través de productos ecológicos.</p>
+        </div>
+        <div class="cat-card">
+          <div style="font-size:1.8rem;">💚</div>
+          <h3>Valores</h3>
+          <p>Responsabilidad, respeto por el medio ambiente y consumo consciente.</p>
+        </div>
+        <div class="cat-card">
+          <div style="font-size:1.8rem;">🌍</div>
+          <h3>Impacto</h3>
+          <p>Reducir la huella ambiental y construir un futuro más limpio para todos.</p>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; margin-top:40px;">
+        <div>
+          <h2 class="section-title">Contáctanos</h2>
+          <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+            <div class="form-group"><label>Nombre</label><input type="text" placeholder="Tu nombre"></div>
+            <div class="form-group"><label>Correo</label><input type="email" placeholder="tu@correo.com"></div>
+          </div>
+          <div class="form-group"><label>Mensaje</label><textarea rows="4" placeholder="Escribe tu mensaje..."></textarea></div>
+          <button class="btn btn-full" onclick="alert('¡Mensaje enviado! Gracias por contactar a EcoMarket.')">Enviar mensaje</button>
+        </div>
+
+        <div>
+          <h2 class="section-title">Encuéntranos</h2>
+          <div style="background:#e9ece9; height:140px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:2.5rem; margin-bottom:16px;">📍</div>
+          <p style="margin-bottom:8px; font-size:0.95rem;">📍 Lima, Perú</p>
+          <p style="margin-bottom:8px; font-size:0.95rem;">✉️ hola@ecomarket.pe</p>
+          <p style="font-size:0.95rem;">Síguenos en 📷</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="brand" style="font-size:1.1rem;" onclick="irA('inicio')">🌿 EcoMarket</div>
+    <div class="nav-links">
+      <a onclick="irA('inicio')">Inicio</a>
+      <a onclick="irA('catalogo')">Catálogo</a>
+      <a onclick="irA('nosotros')">Nosotros</a>
+    </div>
+    <div>Síguenos en 📷</div>
+  </footer>
+
+  <script>
+    const productos = [
+      { id: 1, nombre: 'Cepillo de bambú', categoria: 'Higiene', precio: 18.90, stock: 24, icono: '🪥', desc: 'Cepillo de dientes de bambú, una alternativa sustentable y natural para tu higiene bucal. Sus cerdas suaves limpian eficazmente sin dañar tus encías.' },
+      { id: 2, nombre: 'Bolsa reutilizable', categoria: 'Bolsas reutilizables', precio: 24.90, stock: 40, icono: '🛍️', desc: 'Bolsa de algodón orgánico resistente y lavable, ideal para reemplazar cientos de bolsas plásticas en tus compras diarias.' },
+      { id: 3, nombre: 'Termo ecológico', categoria: 'Termos', precio: 49.90, stock: 18, icono: '🧴', desc: 'Termo de acero inoxidable con doble pared aislante que conserva tus bebidas frías por 24h y calientes por 12h.' },
+      { id: 4, nombre: 'Pajilla reutilizable', categoria: 'Accesorios', precio: 12.90, stock: 50, icono: '🥢', desc: 'Pajilla de acero inoxidable reutilizable con cepillo limpiador incluido para reducir residuos plásticos.' },
+      { id: 5, nombre: 'Jabón natural', categoria: 'Cuidado del hogar', precio: 16.90, stock: 32, icono: '🧼', desc: 'Jabón artesanal biodegradable elaborado con ingredientes vegetales naturales, libre de químicos agresivos.' },
+      { id: 6, nombre: 'Botella reutilizable', categoria: 'Termos', precio: 34.90, stock: 20, icono: '🍶', desc: 'Botella ligera y libre de BPA con tapa hermética de bambú, perfecta para llevar a la universidad o al trabajo.' }
+    ];
+
+    let carrito = [
+      { ...productos[0], cantidad: 1 },
+      { ...productos[1], cantidad: 1 },
+      { ...productos[2], cantidad: 1 }
+    ];
+
+    function irA(vista) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById('view-' + vista).classList.add('active');
+      document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+      const navEl = document.getElementById('nav-' + vista);
+      if (navEl) navEl.classList.add('active');
+      window.scrollTo(0, 0);
+      if (vista === 'carrito') renderCarrito();
+    }
+
+    function tarjetaHTML(p) {
+      return `
+        <div class="prod-card">
+          <div>
+            <div class="prod-img" style="font-size:4.2rem;">${p.icono}</div>
+            <h4>${p.nombre}</h4>
+            <div class="prod-price">S/ ${p.precio.toFixed(2)}</div>
+          </div>
+          <button class="btn btn-full" onclick="verDetalle(${p.id})">Ver detalle</button>
+        </div>
+      `;
+    }
+
+    function verDetalle(id) {
+      const p = productos.find(x => x.id === id);
+      document.getElementById('detalle-contenido').innerHTML = `
+        <div>
+          <div class="detail-main-img" style="font-size:7rem;">${p.icono}</div>
+          <div class="thumbs">
+            <div class="thumb active" style="font-size:1.8rem;">${p.icono}</div>
+            <div class="thumb" style="font-size:1.8rem;">🌿</div>
+            <div class="thumb" style="font-size:1.8rem;">♻️</div>
+          </div>
+        </div>
+        <div>
+          <h1 style="font-size:1.9rem; margin-bottom:8px;">${p.nombre}</h1>
+          <div style="font-size:1.4rem; font-weight:700; color:var(--green); margin-bottom:12px;">S/ ${p.precio.toFixed(2)}</div>
+          <p style="font-size:0.9rem; margin-bottom:16px;"><span style="color:var(--green);">●</span> <strong>Stock disponible: ${p.stock} unidades</strong></p>
+          <p style="color:var(--muted); font-size:0.95rem;">${p.desc}</p>
+          <ul class="checks">
+            <li>Mango / material biodegradable</li>
+            <li>Diseño ergonómico y duradero</li>
+            <li>Empaque 100% reciclable</li>
+          </ul>
+          <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;">
+            <label style="font-weight:600; font-size:0.9rem;">Cantidad:</label>
+            <input id="det-qty" type="number" value="1" min="1" max="${p.stock}" style="width:65px; padding:6px; border:1px solid var(--border); border-radius:6px;">
+          </div>
+          <button class="btn btn-full" onclick="agregarAlCarrito(${p.id})">🛒 Agregar al carrito</button>
+        </div>
+      `;
+      const rel = productos.filter(x => x.id !== id).slice(0, 3);
+      document.getElementById('grid-relacionados').innerHTML = rel.map(tarjetaHTML).join('');
+      irA('detalle');
+    }
+
+    function agregarAlCarrito(id) {
+      const qty = parseInt(document.getElementById('det-qty').value) || 1;
+      const existente = carrito.find(c => c.id === id);
+      if (existente) existente.cantidad += qty;
+      else carrito.push({ ...productos.find(p => p.id === id), cantidad: qty });
+      actualizarBadge();
+      irA('carrito');
+    }
+
+    function actualizarBadge() {
+      const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+      document.getElementById('badge-count').innerText = totalItems;
+    }
+
+    function renderCarrito() {
+      const body = document.getElementById('cart-body');
+      body.innerHTML = carrito.map((item, idx) => `
+        <tr>
+          <td style="display:flex; align-items:center; gap:12px;">
+            <span style="background:var(--card-bg); padding:10px; border-radius:6px; font-size:1.5rem;">${item.icono}</span>
+            <strong>${item.nombre}</strong>
+          </td>
+          <td>S/ ${item.precio.toFixed(2)}</td>
+          <td>
+            <div class="qty-box">
+              <button onclick="cambiarCant(${idx}, -1)">-</button>
+              <span style="padding:0 8px;">${item.cantidad}</span>
+              <button onclick="cambiarCant(${idx}, 1)">+</button>
+            </div>
+          </td>
+          <td><strong>S/ ${(item.precio * item.cantidad).toFixed(2)}</strong></td>
+          <td><button onclick="eliminarItem(${idx})" style="background:none; border:none; cursor:pointer;">🗑️</button></td>
+        </tr>
       `).join('');
+
+      const sub = carrito.reduce((acc, el) => acc + el.precio * el.cantidad, 0);
+      const count = carrito.reduce((acc, el) => acc + el.cantidad, 0);
+      document.getElementById('sum-count').innerText = count;
+      document.getElementById('sum-sub').innerText = sub.toFixed(2);
+      document.getElementById('sum-total').innerText = (count > 0 ? sub + 8 : 0).toFixed(2);
     }
 
-    function filtrar(cat, btn) {
-      if (btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-      }
-      if (cat === 'Todos') renderizar(productos);
-      else renderizar(productos.filter(p => p.categoria === cat));
+    function cambiarCant(idx, delta) {
+      carrito[idx].cantidad += delta;
+      if (carrito[idx].cantidad <= 0) carrito.splice(idx, 1);
+      actualizarBadge();
+      renderCarrito();
     }
 
-    function agregarCarrito(id) {
-      const prod = productos.find(p => p.id === id);
-      carrito.push(prod);
-      document.getElementById('cart-count').innerText = carrito.length;
+    function eliminarItem(idx) {
+      carrito.splice(idx, 1);
+      actualizarBadge();
+      renderCarrito();
     }
-
-    function abrirCarrito() {
-      const div = document.getElementById('items-carrito');
-      if (carrito.length === 0) {
-        div.innerHTML = 'Tu carrito está vacío.';
-      } else {
-        div.innerHTML = carrito.map(c => `<div class="cart-item"><span>${c.nombre}</span><strong>S/ ${Number(c.precio).toFixed(2)}</strong></div>`).join('');
-      }
-      const total = carrito.reduce((acc, el) => acc + Number(el.precio), 0);
-      document.getElementById('total-carrito').innerText = total.toFixed(2);
-      document.getElementById('modal-carrito').style.display = 'flex';
-    }
-
-    function cerrarCarrito() { document.getElementById('modal-carrito').style.display = 'none'; }
 
     function finalizarCompra() {
-      if (carrito.length === 0) return alert('Agrega productos primero');
-      alert('¡Pedido registrado con éxito en EcoMarket!');
+      if (carrito.length === 0) return alert('Tu carrito está vacío.');
+      alert('¡Compra finalizada con éxito! Gracias por elegir EcoMarket.');
       carrito = [];
-      document.getElementById('cart-count').innerText = '0';
-      cerrarCarrito();
+      actualizarBadge();
+      renderCarrito();
     }
 
-    // Intenta conectar al backend; si está en modo vista previa usa el catálogo completo
-    fetch('http://localhost:3000/api/productos')
-      .then(res => res.json())
-      .then(data => {
-        if (data && data.length > 3) productos = data;
-        renderizar(productos);
-      })
-      .catch(() => renderizar(productos));
+    function filtrarDesdeInicio(cat) {
+      document.querySelectorAll('.sidebar input[type="checkbox"]').forEach(cb => cb.checked = (cb.value === cat));
+      aplicarFiltros();
+      irA('catalogo');
+    }
+
+    function aplicarFiltros(maxPrecio = 100) {
+      const checks = Array.from(document.querySelectorAll('.sidebar input[type="checkbox"]:checked')).map(c => c.value);
+      const filtrados = productos.filter(p => {
+        const okCat = checks.length === 0 || checks.includes(p.categoria);
+        const okPrice = p.precio <= maxPrecio;
+        return okCat && okPrice;
+      });
+      document.getElementById('grid-catalogo').innerHTML = filtrados.map(tarjetaHTML).join('');
+    }
+
+    // Inicialización
+    document.getElementById('grid-destacados').innerHTML = productos.slice(0, 3).map(tarjetaHTML).join('');
+    document.getElementById('grid-catalogo').innerHTML = productos.map(tarjetaHTML).join('');
+    actualizarBadge();
   </script>
 </body>
 </html>
