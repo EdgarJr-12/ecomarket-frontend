@@ -5,6 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>EcoMarket — Productos Sostenibles</title>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .real-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+      display: block;
+    }
+    .prod-img { padding: 0; overflow: hidden; }
+    .detail-main-img { padding: 0; overflow: hidden; }
+    .thumb { padding: 0; overflow: hidden; }
+    .hero-art { padding: 0; overflow: hidden; }
+  </style>
 </head>
 <body>
 
@@ -20,7 +33,8 @@
       <a id="nav-nosotros" onclick="irA('nosotros')">Nosotros</a>
     </nav>
     <a class="cart-icon" onclick="irA('carrito')">
-      🛒 <span class="cart-badge" id="badge-count">3</span>
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-badge" id="badge-count">3</span>
     </a>
   </header>
 
@@ -33,26 +47,26 @@
         <button class="btn btn-pill" onclick="irA('catalogo')">Explorar productos →</button>
       </div>
       <div class="hero-art">
-        <svg width="160" height="160" viewBox="0 0 24 24" fill="#8fa891"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>
+        <img class="real-img" src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80" alt="Naturaleza y sostenibilidad">
       </div>
     </div>
 
     <div class="container">
       <div class="cat-grid">
         <div class="cat-card" onclick="filtrarDesdeInicio('Higiene')">
-          <div style="font-size: 1.8rem; color: var(--green);">🌿</div>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4f7952" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
           <h3>Higiene</h3>
           <p>Cuidado personal sustentable</p>
           <span style="color: var(--green); font-weight: bold;">→</span>
         </div>
         <div class="cat-card" onclick="filtrarDesdeInicio('Bolsas reutilizables')">
-          <div style="font-size: 1.8rem; color: var(--green);">🛍️</div>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4f7952" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
           <h3>Bolsas reutilizables</h3>
           <p>Reduce el plástico, lleva la diferencia</p>
           <span style="color: var(--green); font-weight: bold;">→</span>
         </div>
         <div class="cat-card" onclick="filtrarDesdeInicio('Termos')">
-          <div style="font-size: 1.8rem; color: var(--green);">🧴</div>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4f7952" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 2h6"/><path d="M10 2v2a2 2 0 0 1-2 2v14a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6a2 2 0 0 1-2-2V2"/></svg>
           <h3>Termos</h3>
           <p>Mantén tus bebidas a la temperatura ideal</p>
           <span style="color: var(--green); font-weight: bold;">→</span>
@@ -154,7 +168,9 @@
     <div class="container">
       <h2 class="section-title">Nuestra historia</h2>
       <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap: 32px; align-items:center; margin-bottom:48px;">
-        <div class="hero-art" style="height:200px; font-size:4rem; color:var(--green);">♻️</div>
+        <div class="hero-art" style="height:220px;">
+          <img class="real-img" src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&w=800&q=80" alt="Reciclaje y ecología">
+        </div>
         <div style="color:var(--muted);">
           <p style="margin-bottom:12px;">En <strong style="color:var(--text);">EcoMarket</strong> creemos que pequeños hábitos generan grandes cambios.</p>
           <p>Somos una tienda en línea dedicada a ofrecer <strong style="color:var(--text);">productos ecológicos y sostenibles</strong> que te ayudan a reducir el uso de plástico y cuidar el medio ambiente.</p>
@@ -164,17 +180,17 @@
       <h2 class="section-title">Nuestra misión y valores</h2>
       <div class="cat-grid">
         <div class="cat-card">
-          <div style="font-size:1.8rem;">🌿</div>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4f7952" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
           <h3>Misión</h3>
           <p>Promover un estilo de vida más sostenible a través de productos ecológicos.</p>
         </div>
         <div class="cat-card">
-          <div style="font-size:1.8rem;">💚</div>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4f7952" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
           <h3>Valores</h3>
           <p>Responsabilidad, respeto por el medio ambiente y consumo consciente.</p>
         </div>
         <div class="cat-card">
-          <div style="font-size:1.8rem;">🌍</div>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#4f7952" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
           <h3>Impacto</h3>
           <p>Reducir la huella ambiental y construir un futuro más limpio para todos.</p>
         </div>
@@ -193,10 +209,12 @@
 
         <div>
           <h2 class="section-title">Encuéntranos</h2>
-          <div style="background:#e9ece9; height:140px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:2.5rem; margin-bottom:16px;">📍</div>
-          <p style="margin-bottom:8px; font-size:0.95rem;">📍 Lima, Perú</p>
-          <p style="margin-bottom:8px; font-size:0.95rem;">✉️ hola@ecomarket.pe</p>
-          <p style="font-size:0.95rem;">Síguenos en 📷</p>
+          <div style="height:150px; border-radius:10px; overflow:hidden; margin-bottom:16px; border:1px solid var(--border);">
+            <img class="real-img" src="https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=700&q=80" alt="Ubicación Lima Perú">
+          </div>
+          <p style="margin-bottom:8px; font-size:0.95rem;"><strong>Ubicación:</strong> Lima, Perú</p>
+          <p style="margin-bottom:8px; font-size:0.95rem;"><strong>Correo:</strong> hola@ecomarket.pe</p>
+          <p style="font-size:0.95rem;"><strong>Instagram:</strong> @ecomarket.pe</p>
         </div>
       </div>
     </div>
@@ -204,23 +222,74 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="brand" style="font-size:1.1rem;" onclick="irA('inicio')">🌿 EcoMarket</div>
+    <div class="brand" style="font-size:1.1rem;" onclick="irA('inicio')">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="#4f7952"><path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/></svg>
+      EcoMarket
+    </div>
     <div class="nav-links">
       <a onclick="irA('inicio')">Inicio</a>
       <a onclick="irA('catalogo')">Catálogo</a>
       <a onclick="irA('nosotros')">Nosotros</a>
     </div>
-    <div>Síguenos en 📷</div>
+    <div>Síguenos en @ecomarket.pe</div>
   </footer>
 
   <script>
     const productos = [
-      { id: 1, nombre: 'Cepillo de bambú', categoria: 'Higiene', precio: 18.90, stock: 24, icono: '🪥', desc: 'Cepillo de dientes de bambú, una alternativa sustentable y natural para tu higiene bucal. Sus cerdas suaves limpian eficazmente sin dañar tus encías.' },
-      { id: 2, nombre: 'Bolsa reutilizable', categoria: 'Bolsas reutilizables', precio: 24.90, stock: 40, icono: '🛍️', desc: 'Bolsa de algodón orgánico resistente y lavable, ideal para reemplazar cientos de bolsas plásticas en tus compras diarias.' },
-      { id: 3, nombre: 'Termo ecológico', categoria: 'Termos', precio: 49.90, stock: 18, icono: '🧴', desc: 'Termo de acero inoxidable con doble pared aislante que conserva tus bebidas frías por 24h y calientes por 12h.' },
-      { id: 4, nombre: 'Pajilla reutilizable', categoria: 'Accesorios', precio: 12.90, stock: 50, icono: '🥢', desc: 'Pajilla de acero inoxidable reutilizable con cepillo limpiador incluido para reducir residuos plásticos.' },
-      { id: 5, nombre: 'Jabón natural', categoria: 'Cuidado del hogar', precio: 16.90, stock: 32, icono: '🧼', desc: 'Jabón artesanal biodegradable elaborado con ingredientes vegetales naturales, libre de químicos agresivos.' },
-      { id: 6, nombre: 'Botella reutilizable', categoria: 'Termos', precio: 34.90, stock: 20, icono: '🍶', desc: 'Botella ligera y libre de BPA con tapa hermética de bambú, perfecta para llevar a la universidad o al trabajo.' }
+      {
+        id: 1,
+        nombre: 'Cepillo de bambú',
+        categoria: 'Higiene',
+        precio: 18.90,
+        stock: 24,
+        img: 'https://images.unsplash.com/photo-1607613009820-a29f7bb81c04?auto=format&fit=crop&w=600&q=80',
+        desc: 'Cepillo de dientes de bambú, una alternativa sustentable y natural para tu higiene bucal. Sus cerdas suaves limpian eficazmente sin dañar tus encías.'
+      },
+      {
+        id: 2,
+        nombre: 'Bolsa reutilizable',
+        categoria: 'Bolsas reutilizables',
+        precio: 24.90,
+        stock: 40,
+        img: 'https://images.unsplash.com/photo-1597484661643-2f5fef640dd1?auto=format&fit=crop&w=600&q=80',
+        desc: 'Bolsa de algodón orgánico resistente y lavable, ideal para reemplazar cientos de bolsas plásticas en tus compras diarias.'
+      },
+      {
+        id: 3,
+        nombre: 'Termo ecológico',
+        categoria: 'Termos',
+        precio: 49.90,
+        stock: 18,
+        img: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=600&q=80',
+        desc: 'Termo de acero inoxidable con doble pared aislante que conserva tus bebidas frías por 24h y calientes por 12h.'
+      },
+      {
+        id: 4,
+        nombre: 'Pajilla reutilizable',
+        categoria: 'Accesorios',
+        precio: 12.90,
+        stock: 50,
+        img: 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?auto=format&fit=crop&w=600&q=80',
+        desc: 'Set de pajillas de acero inoxidable reutilizables con cepillo limpiador incluido para reducir residuos plásticos.'
+      },
+      {
+        id: 5,
+        nombre: 'Jabón natural',
+        categoria: 'Cuidado del hogar',
+        precio: 16.90,
+        stock: 32,
+        img: 'https://images.unsplash.com/photo-1600857062241-98e5dba7f214?auto=format&fit=crop&w=600&q=80',
+        desc: 'Jabón artesanal biodegradable elaborado con ingredientes vegetales naturales, libre de químicos agresivos.'
+      },
+      {
+        id: 6,
+        nombre: 'Botella reutilizable',
+        categoria: 'Termos',
+        precio: 34.90,
+        stock: 20,
+        img: 'https://images.unsplash.com/photo-1523362628745-0c100150b504?auto=format&fit=crop&w=600&q=80',
+        desc: 'Botella ligera y libre de BPA con tapa hermética de bambú, perfecta para llevar a la universidad o al trabajo.'
+      }
     ];
 
     let carrito = [
@@ -243,7 +312,9 @@
       return `
         <div class="prod-card">
           <div>
-            <div class="prod-img" style="font-size:4.2rem;">${p.icono}</div>
+            <div class="prod-img">
+              <img class="real-img" src="${p.img}" alt="${p.nombre}">
+            </div>
             <h4>${p.nombre}</h4>
             <div class="prod-price">S/ ${p.precio.toFixed(2)}</div>
           </div>
@@ -254,13 +325,16 @@
 
     function verDetalle(id) {
       const p = productos.find(x => x.id === id);
+      const otros = productos.filter(x => x.id !== id);
       document.getElementById('detalle-contenido').innerHTML = `
         <div>
-          <div class="detail-main-img" style="font-size:7rem;">${p.icono}</div>
+          <div class="detail-main-img">
+            <img id="main-detail-photo" class="real-img" src="${p.img}" alt="${p.nombre}">
+          </div>
           <div class="thumbs">
-            <div class="thumb active" style="font-size:1.8rem;">${p.icono}</div>
-            <div class="thumb" style="font-size:1.8rem;">🌿</div>
-            <div class="thumb" style="font-size:1.8rem;">♻️</div>
+            <div class="thumb active" onclick="cambiarFoto('${p.img}', this)"><img class="real-img" src="${p.img}"></div>
+            <div class="thumb" onclick="cambiarFoto('${otros[0].img}', this)"><img class="real-img" src="${otros[0].img}"></div>
+            <div class="thumb" onclick="cambiarFoto('${otros[1].img}', this)"><img class="real-img" src="${otros[1].img}"></div>
           </div>
         </div>
         <div>
@@ -277,12 +351,17 @@
             <label style="font-weight:600; font-size:0.9rem;">Cantidad:</label>
             <input id="det-qty" type="number" value="1" min="1" max="${p.stock}" style="width:65px; padding:6px; border:1px solid var(--border); border-radius:6px;">
           </div>
-          <button class="btn btn-full" onclick="agregarAlCarrito(${p.id})">🛒 Agregar al carrito</button>
+          <button class="btn btn-full" onclick="agregarAlCarrito(${p.id})">Agregar al carrito</button>
         </div>
       `;
-      const rel = productos.filter(x => x.id !== id).slice(0, 3);
-      document.getElementById('grid-relacionados').innerHTML = rel.map(tarjetaHTML).join('');
+      document.getElementById('grid-relacionados').innerHTML = otros.slice(0, 3).map(tarjetaHTML).join('');
       irA('detalle');
+    }
+
+    function cambiarFoto(url, el) {
+      document.getElementById('main-detail-photo').src = url;
+      document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
     }
 
     function agregarAlCarrito(id) {
@@ -304,7 +383,7 @@
       body.innerHTML = carrito.map((item, idx) => `
         <tr>
           <td style="display:flex; align-items:center; gap:12px;">
-            <span style="background:var(--card-bg); padding:10px; border-radius:6px; font-size:1.5rem;">${item.icono}</span>
+            <img src="${item.img}" style="width:48px; height:48px; object-fit:cover; border-radius:6px;">
             <strong>${item.nombre}</strong>
           </td>
           <td>S/ ${item.precio.toFixed(2)}</td>
@@ -316,7 +395,7 @@
             </div>
           </td>
           <td><strong>S/ ${(item.precio * item.cantidad).toFixed(2)}</strong></td>
-          <td><button onclick="eliminarItem(${idx})" style="background:none; border:none; cursor:pointer;">🗑️</button></td>
+          <td><button onclick="eliminarItem(${idx})" style="background:none; border:none; cursor:pointer; color:#999; font-weight:bold;">✕</button></td>
         </tr>
       `).join('');
 
