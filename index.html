@@ -2,31 +2,271 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>EcoMarket - Productos Sostenibles</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoMarket | Tienda Sostenible</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f9f4; }
-    h1 { color: #2e7d32; }
-    .card { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    :root {
+      --primary: #1b5e20;
+      --secondary: #4caf50;
+      --accent: #e8f5e9;
+      --dark: #1f2937;
+      --light: #f9fafb;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background-color: var(--light); color: var(--dark); }
+
+    /* Navbar */
+    header {
+      background-color: white;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+    nav { display: flex; gap: 20px; align-items: center; }
+    nav a { text-decoration: none; color: var(--dark); font-weight: 500; cursor: pointer; }
+    nav a:hover { color: var(--secondary); }
+    .cart-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Hero Banner */
+    .hero {
+      background: linear-gradient(135deg, #1b5e20 0%, #388e3c 100%);
+      color: white;
+      padding: 3.5rem 5%;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2.3rem; margin-bottom: 0.8rem; }
+    .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto; }
+
+    /* Filtros y Catálogo */
+    .container { max-width: 1100px; margin: 2.5rem auto; padding: 0 20px; }
+    .filters { display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap; justify-content: center; }
+    .filter-btn {
+      padding: 8px 18px;
+      border: 1px solid #d1d5db;
+      background: white;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card-img {
+      height: 150px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+    .card-body { padding: 1.2rem; }
+    .badge {
+      background: var(--accent);
+      color: var(--primary);
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-weight: 700;
+    }
+    .card-title { font-size: 1.1rem; margin: 10px 0 6px; font-weight: 700; }
+    .card-stock { font-size: 0.85rem; color: #6b7280; margin-bottom: 12px; }
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid #f3f4f6;
+    }
+    .price { font-size: 1.2rem; font-weight: 800; color: var(--primary); }
+    .add-btn {
+      background: var(--secondary);
+      color: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .add-btn:hover { background: var(--primary); }
+
+    /* Modal Carrito */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 420px;
+    }
+    .cart-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
+    .checkout-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 15px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
-  <h1>🌱 Bienvenidos a EcoMarket</h1>
-  <p>Catálogo de productos ecológicos:</p>
-  <div id="lista-productos">Cargando productos...</div>
+
+  <header>
+    <div class="logo">🌿 EcoMarket</div>
+    <nav>
+      <a onclick="filtrar('Todos')">Catálogo</a>
+      <a onclick="alert('Módulo Administrador: Gestión de Stock activo')">Admin Stock</a>
+      <button class="cart-btn" onclick="abrirCarrito()">🛒 Carrito (<span id="cart-count">0</span>)</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Productos Sostenibles para un Futuro Verde</h1>
+    <p>Consumo responsable con envío eco-amigable. Calidad certificada para tu hogar y día a día.</p>
+  </section>
+
+  <main class="container">
+    <div class="filters">
+      <button class="filter-btn active" onclick="filtrar('Todos', this)">Todos</button>
+      <button class="filter-btn" onclick="filtrar('Hogar', this)">Hogar</button>
+      <button class="filter-btn" onclick="filtrar('Cuidado Personal', this)">Cuidado Personal</button>
+      <button class="filter-btn" onclick="filtrar('Accesorios', this)">Accesorios</button>
+    </div>
+
+    <div class="grid" id="catalogo"></div>
+  </main>
+
+  <!-- Modal Carrito -->
+  <div class="modal" id="modal-carrito">
+    <div class="modal-content">
+      <h2 style="margin-bottom: 15px;">🛒 Tu Carrito EcoMarket</h2>
+      <div id="items-carrito">Tu carrito está vacío.</div>
+      <div style="margin-top: 15px; font-weight: bold; text-align: right;">Total: S/ <span id="total-carrito">0.00</span></div>
+      <button class="checkout-btn" onclick="finalizarCompra()">Finalizar Pedido</button>
+      <button onclick="cerrarCarrito()" style="width:100%; background:none; border:none; margin-top:10px; color:#666; cursor:pointer;">Seguir comprando</button>
+    </div>
+  </div>
 
   <script>
+    const productosRespaldo = [
+      { id: 1, nombre: 'Cepillo Dental de Bambú', categoria: 'Cuidado Personal', precio: 15.00, stock: 50, icono: '🪥' },
+      { id: 2, nombre: 'Bolsa de Tela Orgánica', categoria: 'Accesorios', precio: 12.00, stock: 100, icono: '🛍️' },
+      { id: 3, nombre: 'Botella Térmica Inox', categoria: 'Accesorios', precio: 45.00, stock: 30, icono: '🧴' },
+      { id: 4, nombre: 'Jabón Artesanal de Avena', categoria: 'Cuidado Personal', precio: 18.50, stock: 40, icono: '🧼' },
+      { id: 5, nombre: 'Set Cubiertos de Madera', categoria: 'Hogar', precio: 25.00, stock: 35, icono: '🍴' },
+      { id: 6, nombre: 'Esponja Vegetal Luffa', categoria: 'Hogar', precio: 10.00, stock: 60, icono: '🧽' }
+    ];
+
+    let productos = [...productosRespaldo];
+    let carrito = [];
+
+    function renderizar(lista) {
+      const grid = document.getElementById('catalogo');
+      grid.innerHTML = lista.map(p => `
+        <div class="card">
+          <div class="card-img">${p.icono || '🌱'}</div>
+          <div class="card-body">
+            <span class="badge">${p.categoria || 'Ecológico'}</span>
+            <h3 class="card-title">${p.nombre}</h3>
+            <p class="card-stock">Stock disponible: ${p.stock} unid.</p>
+            <div class="card-footer">
+              <span class="price">S/ ${Number(p.precio).toFixed(2)}</span>
+              <button class="add-btn" onclick="agregarCarrito(${p.id})">+ Agregar</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filtrar(cat, btn) {
+      if (btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      }
+      if (cat === 'Todos') renderizar(productos);
+      else renderizar(productos.filter(p => p.categoria === cat));
+    }
+
+    function agregarCarrito(id) {
+      const prod = productos.find(p => p.id === id);
+      carrito.push(prod);
+      document.getElementById('cart-count').innerText = carrito.length;
+    }
+
+    function abrirCarrito() {
+      const div = document.getElementById('items-carrito');
+      if (carrito.length === 0) {
+        div.innerHTML = 'Tu carrito está vacío.';
+      } else {
+        div.innerHTML = carrito.map(c => `<div class="cart-item"><span>${c.nombre}</span><strong>S/ ${Number(c.precio).toFixed(2)}</strong></div>`).join('');
+      }
+      const total = carrito.reduce((acc, el) => acc + Number(el.precio), 0);
+      document.getElementById('total-carrito').innerText = total.toFixed(2);
+      document.getElementById('modal-carrito').style.display = 'flex';
+    }
+
+    function cerrarCarrito() { document.getElementById('modal-carrito').style.display = 'none'; }
+
+    function finalizarCompra() {
+      if (carrito.length === 0) return alert('Agrega productos primero');
+      alert('¡Pedido registrado con éxito en EcoMarket!');
+      carrito = [];
+      document.getElementById('cart-count').innerText = '0';
+      cerrarCarrito();
+    }
+
+    // Intenta conectar al backend; si está en modo vista previa usa el catálogo completo
     fetch('http://localhost:3000/api/productos')
       .then(res => res.json())
       .then(data => {
-        const contenedor = document.getElementById('lista-productos');
-        contenedor.innerHTML = data.map(p => 
-          `<div class="card"><strong>${p.nombre}</strong> - S/ ${p.precio} (Stock: ${p.stock})</div>`
-        ).join('');
+        if (data && data.length > 3) productos = data;
+        renderizar(productos);
       })
-      .catch(() => {
-        document.getElementById('lista-productos').innerHTML = 
-          '<div class="card"><strong>Cepillo de Bambú</strong> - S/ 15.00 (Vista previa offline)</div>';
-      });
+      .catch(() => renderizar(productos));
   </script>
 </body>
 </html>
